@@ -4,6 +4,8 @@ use serde::{Deserialize, Serialize};
 use spin_sdk::http::{Request, Response};
 use uuid::Uuid;
 
+use super::common::bad_request;
+
 #[derive(Debug, Deserialize)]
 struct UuidRequest {
     version: u8,
@@ -16,37 +18,23 @@ struct UuidReponse {
     data: Option<Vec<Uuid>>,
 }
 
-fn baq_request(message: Option<String>) -> Result<Response> {
-    let return_message = match message {
-        Some(m) => m,
-        _ => "Bad request".to_string(),
-    };
-
-    let json_message = UuidReponse {
-        message: return_message,
-        data: None,
-    };
-
-    let serialized_response = serde_json::to_string(&json_message).unwrap();
-
-    Ok(http::Response::builder()
-        .status(StatusCode::BAD_REQUEST)
-        .header("Content-Type", "application/json")
-        .body(Some(serialized_response.into()))?)
-}
-
 pub fn handle_uuid_request(req: Request) -> Result<Response> {
     let uuid_request: UuidRequest = match req.body() {
         Some(body) => match serde_json::from_slice(&body) {
             Ok(request) => request,
-            _ => return baq_request(None),
+            _ => return bad_request(Some("Bad payload format".to_string())),
         },
-        _ => return baq_request(None),
+        _ => return bad_request(None),
     };
 
     let uuid_callable = match uuid_request.version {
         4 => || vec![uuid::Uuid::new_v4()],
-        _ => return baq_request(None),
+        _ => {
+            return bad_request(Some(format!(
+                "Unsupported Uuid version {0}",
+                uuid_request.version
+            )))
+        }
     };
 
     let mut uuid_response: Vec<Uuid> = vec![];
@@ -55,10 +43,15 @@ pub fn handle_uuid_request(req: Request) -> Result<Response> {
         uuid_response.append(&mut uuid_callable())
     }
 
-    let serialized_response = serde_json::to_string(&uuid_response).unwrap();
+    let json_message = UuidReponse {
+        message: format!("Uuid version {0}", uuid_request.version),
+        data: Some(uuid_response),
+    };
+
+    let serialized_response = serde_json::to_string(&json_message).unwrap();
 
     Ok(http::Response::builder()
         .header("Content-Type", "application/json")
-        .status(200)
+        .status(StatusCode::OK)
         .body(Some(serialized_response.into()))?)
 }

@@ -6,6 +6,7 @@ use spin_sdk::{
 };
 
 mod tools;
+use tools::base64::handle_base64_request;
 use tools::uuid::handle_uuid_request;
 
 #[http_component]
@@ -18,6 +19,7 @@ fn handle_dev_tools(req: Request) -> Result<Response> {
             .status(200)
             .body(Some("Hello, Fermyon!".into()))?),
         (&Method::POST, "/uuid") => handle_uuid_request(req),
+        (&Method::POST, "/base64") => handle_base64_request(req),
         _ => not_found(),
     }
 }

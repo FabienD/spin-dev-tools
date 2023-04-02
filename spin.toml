@@ -6,10 +6,23 @@ trigger = { type = "http", base = "/" }
 version = "0.1.0"
 
 [[component]]
-id = "dev-tools"
-source = "target/wasm32-wasi/release/dev_tools.wasm"
-allowed_http_hosts = []
+id = "web"
+source = "modules/spin_static_fs.wasm"
+environment = { FALLBACK_PATH = "index.html" }
+[[component.files]]
+source = "web/dist"
+destination = "/"
 [component.trigger]
 route = "/..."
 [component.build]
+command = "npm run build"
+workdir = "web"
+
+[[component]]
+id = "api"
+source = "api/target/wasm32-wasi/release/api.wasm"
+[component.trigger]
+route = "/api/..."
+[component.build]
 command = "cargo build --target wasm32-wasi --release"
+workdir = "api"

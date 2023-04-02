@@ -9,6 +9,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7de8ce5e0f9f8d88245311066a578d72b7af3e7088f32783804676302df237e4"
 
 [[package]]
+name = "api"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "base64",
+ "bytes",
+ "http",
+ "serde",
+ "serde_json",
+ "spin-sdk",
+ "urlencoding",
+ "uuid",
+ "wit-bindgen-rust",
+]
+
+[[package]]
 name = "async-trait"
 version = "0.1.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -42,22 +58,6 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
-
-[[package]]
-name = "dev-tools"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "base64",
- "bytes",
- "http",
- "serde",
- "serde_json",
- "spin-sdk",
- "urlencoding",
- "uuid",
- "wit-bindgen-rust",
-]
 
 [[package]]
 name = "fnv"

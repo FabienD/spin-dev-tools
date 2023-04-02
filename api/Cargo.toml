@@ -1,5 +1,5 @@
 [package]
-name = "dev-tools"
+name = "api"
 authors = ["Fabien D. <fabien@myprod.net>"]
 description = "A set of tools"
 version = "0.1.0"

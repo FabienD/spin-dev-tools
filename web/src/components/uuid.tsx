@@ -41,16 +41,16 @@ const Uuid: FC = () => {
 
     return (
        <>
-        <div className='flex flex-row space-x-4 h-40 max-h-40'>
+        <div className='flex flex-row space-x-4 h-40 max-h-40 my-5'>
             <div className='basis-1/2 bg-gray-100 p-5 rounded'>
-                <h2 className='font-bold text-2xl mb-4 text-purple-500'>Uuid generator</h2>
+                <h2 className='font-bold text-2xl mb-4 text-sky-500'>Uuid generator</h2>
                 <form action="" method="post" onSubmit={handleUuid} className='flex space-x-2'>
                     <div>
                         <label htmlFor="version" className='block'>Version</label>
                         <select 
                             id="version" 
                             name="version" 
-                            className='rounded focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400'
+                            className='rounded focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400'
                         >
                             <option value="4">Version 4</option>
                         </select>
@@ -64,13 +64,13 @@ const Uuid: FC = () => {
                             placeholder="1 to 99" 
                             maxLength={2} 
                             required 
-                            className='rounded focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400' 
+                            className='rounded focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400' 
                         />
                     </div>
-                    <button type="submit" className='font-bold text-white bg-purple-500 hover:bg-violet-600 rounded p-3 my-5'>Generate</button>
+                    <button type="submit" className='font-bold text-white bg-sky-500 hover:bg-sky-600 rounded p-3 my-5'>Generate</button>
                 </form>
             </div>
-            <div className='basis-1/2 bg-pink-100 p-5 rounded overflow-scroll'>           
+            <div className='basis-1/2 bg-sky-100 p-5 rounded overflow-y-auto'>
                 {error && <p className='text-pink-900'>{error}</p>}
                 {uuids && 
                     <UuidList uuids={uuids} />

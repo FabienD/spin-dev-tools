@@ -4,11 +4,11 @@ import Uuid from "@/components/uuid";
 
 export default function Page() {
     return <>
-        <header className="p-4 sm:py-10">
+        <header className="p-4 sm:py-6">
             <h1 className="font-extrabold text-6xl sm:text-8xl">
                 Dev <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500 ">tools</span>
             </h1>
-            <h2 className="pl-2"><strong>Wasm</strong> server side sample application.</h2>
+            <h2 className="pl-2">Run on <strong>Wasm</strong> server side.</h2>
         </header>
         <section className="p-2">
             <Uuid />

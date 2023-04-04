@@ -70,12 +70,14 @@ const Uuid: FC = () => {
                     <button type="submit" className='font-bold text-white bg-sky-500 hover:bg-sky-600 rounded p-3 my-5'>Generate</button>
                 </form>
             </div>
-            <div className='sm:basis-1/2 bg-sky-100 p-3 sm:p-5 rounded overflow-y-auto shadow-md'>
-                {error && <p className='text-pink-900'>{error}</p>}
-                {uuids && 
-                    <UuidList uuids={uuids} />
-                }
-            </div>
+            {(error || uuids) &&
+                <div className='sm:basis-1/2 bg-sky-100 p-3 sm:p-5 rounded overflow-y-auto shadow-md'>
+                    {error && <p className='text-pink-900'>{error}</p>}
+                    {uuids && 
+                        <UuidList uuids={uuids} />
+                    }
+                </div>
+            }
         </div>
       </> 
     )

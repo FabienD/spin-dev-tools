@@ -41,11 +41,11 @@ const Uuid: FC = () => {
 
     return (
        <>
-        <div className='flex flex-row space-x-4 h-40 max-h-40 my-5'>
-            <div className='basis-1/2 bg-gray-100 p-5 rounded'>
-                <h2 className='font-bold text-2xl mb-4 text-sky-500'>Uuid generator</h2>
-                <form action="" method="post" onSubmit={handleUuid} className='flex space-x-2'>
-                    <div>
+        <div className='sm:flex sm:space-x-4 lg:h-40 lg:max-h-40 my-5'>
+            <div className='sm:basis-1/2 bg-gray-100  p-3 sm:p-5 rounded shadow-md'>
+                <h2 className='font-bold text-xl sm:text-2xl mb-4 text-sky-500'>Uuid generator</h2>
+                <form action="" method="post" onSubmit={handleUuid} className='lg:flex lg:space-x-2'>
+                    <div className='lg:basis-1/2'>
                         <label htmlFor="version" className='block'>Version</label>
                         <select 
                             id="version" 
@@ -55,7 +55,7 @@ const Uuid: FC = () => {
                             <option value="4">Version 4</option>
                         </select>
                     </div>
-                    <div>
+                    <div className='lg:basis-1/2'>
                         <label htmlFor="sample_to_generate" className='block'>Number to generate</label>
                         <input 
                             type="text" 
@@ -70,7 +70,7 @@ const Uuid: FC = () => {
                     <button type="submit" className='font-bold text-white bg-sky-500 hover:bg-sky-600 rounded p-3 my-5'>Generate</button>
                 </form>
             </div>
-            <div className='basis-1/2 bg-sky-100 p-5 rounded overflow-y-auto'>
+            <div className='sm:basis-1/2 bg-sky-100 p-3 sm:p-5 rounded overflow-y-auto shadow-md'>
                 {error && <p className='text-pink-900'>{error}</p>}
                 {uuids && 
                     <UuidList uuids={uuids} />

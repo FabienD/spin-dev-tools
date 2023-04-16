@@ -22,7 +22,6 @@ build-prod:
 build-local:
 	@echo "Building spin for local"
 	export NEXT_PUBLIC_API_URL=http://localhost:3000/api && spin build
-	spin build
 
 web-dev:
 	@echo "Starting web"

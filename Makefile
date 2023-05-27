@@ -21,15 +21,19 @@ build-prod:
 
 build-local:
 	@echo "Building spin for local"
-	export NEXT_PUBLIC_API_URL=http://localhost:3000/api && spin build
+	export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && spin build
+
+watch-local:
+	@echo "Building spin for local"
+	export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && spin watch
 
 web-dev:
 	@echo "Starting web"
-	cd web && yarn dev
+	cd web && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && yarn dev
 
 web-build:
 	@echo "Building web microservice"
-	cd web && yarn build
+	cd web && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && yarn build
 
 api-build:
 	@echo "Building api microservice"

@@ -3,7 +3,6 @@ use http::StatusCode;
 use serde::{Deserialize, Serialize};
 use spin_sdk::http::{Request, Response};
 use uuid::Uuid;
-use uuid::Builder;
 
 use super::common::bad_request;
 

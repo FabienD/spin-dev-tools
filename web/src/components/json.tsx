@@ -8,7 +8,7 @@ const Json: FC = () => {
     const [json, setJson] = React.useState<string|null>();
     const [error, setError] = React.useState<string|null>();
 
-    const handleUrl = async (event: React.SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    const handleJson = async (event: React.SyntheticEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const action = formData.get('action');
@@ -44,7 +44,7 @@ const Json: FC = () => {
         <div className='sm:flex sm:space-x-4 my-5'>
             <div className='sm:basis-1/2 bg-gray-100 p-3 sm:p-5 rounded shadow-md'>
                 <h2 className='font-bold text-xl sm:text-2xl mb-4 text-pink-500'>Json prettyfier & minifier</h2>
-                <form action="" onSubmit={handleUrl} method="post">
+                <form action="" onSubmit={handleJson} method="post">
                     <div>
                         <label htmlFor="action" className='block'>Action</label>
                         <select 

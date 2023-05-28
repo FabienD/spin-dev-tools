@@ -2,6 +2,7 @@ import Base64 from "@/components/base64";
 import Url from "@/components/url";
 import Uuid from "@/components/uuid";
 import Json from "@/components/json";
+import Password from "@/components/password";
 
 export default function Page() {
     return <>
@@ -13,6 +14,7 @@ export default function Page() {
         </header>
         <section className="p-2">
             <Uuid />
+            <Password />
             <Base64 />
             <Url />
             <Json />

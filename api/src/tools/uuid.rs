@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use spin_sdk::http::{Request, Response};
 use uuid::Uuid;
 
-use super::common::bad_request;
+use super::common::*;
 
 #[derive(Debug, Deserialize)]
 struct UuidRequest {

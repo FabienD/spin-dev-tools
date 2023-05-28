@@ -1,21 +1,14 @@
 use anyhow::Result;
-use http::StatusCode;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use spin_sdk::http::{Request, Response};
 use urlencoding;
 
-use super::common::bad_request;
+use super::common::*;
 
 #[derive(Debug, Deserialize)]
 struct UrlRequest {
     action: String,
     input: String,
-}
-
-#[derive(Debug, Serialize)]
-struct UrlReponse {
-    message: String,
-    data: Option<String>,
 }
 
 pub fn handle_url_request(req: Request) -> Result<Response> {
@@ -43,15 +36,10 @@ pub fn handle_url_request(req: Request) -> Result<Response> {
         )));
     }
 
-    let json_message = UrlReponse {
+    let json_message = ApiReponse {
         message: format!("Url action {0}", url_request.action),
         data: Some(process_input),
     };
 
-    let serialized_response = serde_json::to_string(&json_message).unwrap();
-
-    Ok(http::Response::builder()
-        .header("Content-Type", "application/json")
-        .status(StatusCode::OK)
-        .body(Some(serialized_response.into()))?)
+    return return_response(json_message);
 }

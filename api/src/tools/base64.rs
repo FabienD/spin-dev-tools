@@ -1,22 +1,15 @@
 use anyhow::Result;
 use base64::{engine::general_purpose, Engine as _};
-use http::StatusCode;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use spin_sdk::http::{Request, Response};
 use std::str;
 
-use super::common::bad_request;
+use super::common::*;
 
 #[derive(Debug, Deserialize)]
 struct Base64Request {
     action: String,
     input: String,
-}
-
-#[derive(Debug, Serialize)]
-struct Base64Reponse {
-    message: String,
-    data: Option<String>,
 }
 
 pub fn handle_base64_request(req: Request) -> Result<Response> {
@@ -44,15 +37,10 @@ pub fn handle_base64_request(req: Request) -> Result<Response> {
         )));
     }
 
-    let json_message = Base64Reponse {
+    let json_message = ApiReponse {
         message: format!("Base64 action {0}", base64_request.action),
         data: Some(process_input),
     };
 
-    let serialized_response = serde_json::to_string(&json_message).unwrap();
-
-    Ok(http::Response::builder()
-        .header("Content-Type", "application/json")
-        .status(StatusCode::OK)
-        .body(Some(serialized_response.into()))?)
+    return return_response(json_message);
 }

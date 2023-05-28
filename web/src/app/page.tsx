@@ -1,6 +1,7 @@
 import Base64 from "@/components/base64";
 import Url from "@/components/url";
 import Uuid from "@/components/uuid";
+import Json from "@/components/json";
 
 export default function Page() {
     return <>
@@ -14,6 +15,7 @@ export default function Page() {
             <Uuid />
             <Base64 />
             <Url />
+            <Json />
         </section>
         <footer>
             <div className="sm:flex justify-center sm:space-x-4 my-5 text-gray-400">

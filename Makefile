@@ -38,3 +38,7 @@ web-build:
 api-build:
 	@echo "Building api microservice"
 	cd api && cargo build --target wasm32-wasi --release
+
+api-dev:
+	@echo "Building api microservice"
+	cd api && cargo watch --target wasm32-wasi --release

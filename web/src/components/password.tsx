@@ -70,7 +70,7 @@ const Password: FC = () => {
                                 type="text"
                                 maxLength={2}
                                 size={2}
-                                defaultValue={10}
+                                defaultValue={20}
                                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                         </div>
@@ -156,6 +156,7 @@ const Password: FC = () => {
                             aria-describedby="exclude_similar_characters-description"
                             name="exclude_similar_characters"
                             type="checkbox"
+                            defaultChecked={true}
                             className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                         </div>
@@ -171,6 +172,7 @@ const Password: FC = () => {
                             aria-describedby="strict-description"
                             name="strict"
                             type="checkbox"
+                            defaultChecked={true}
                             className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                         </div>

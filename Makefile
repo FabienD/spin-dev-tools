@@ -17,7 +17,7 @@ deploy: build-prod
 
 build-prod:
 	@echo "Building spin for production"
-	export NEXT_PUBLIC_API_URL=https://dev-tools-y8pakkgj.fermyon.app/api && spin build
+	export NEXT_PUBLIC_API_URL=https://dev-tools.fermyon.app/api && spin build
 
 build-local:
 	@echo "Building spin for local"

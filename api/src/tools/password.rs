@@ -1,5 +1,3 @@
-use std::f32::consts::E;
-
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use passwords::PasswordGenerator;

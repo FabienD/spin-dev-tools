@@ -64,7 +64,7 @@ const Json: FC = () => {
                             id="input" 
                             name="input"
                             rows={10}
-                            maxLength={255}
+                            maxLength={4096}
                             className='w-full rounded focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400' 
                             required 
                         />

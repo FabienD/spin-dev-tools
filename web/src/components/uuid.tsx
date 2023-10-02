@@ -52,7 +52,9 @@ const Uuid: FC = () => {
                             name="version" 
                             className='rounded focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400'
                         >
-                            <option value="4">Version 4</option>
+                            <option value="4">Version 4 (Random)</option>
+                            <option value="5">Version 5 (Sha1)</option>
+                            <option value="7">Version 7 (SortRand)</option>
                         </select>
                     </div>
                     <div className='lg:basis-1/2'>

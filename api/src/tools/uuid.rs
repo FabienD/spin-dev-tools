@@ -1,8 +1,10 @@
+use std::time::SystemTime;
 use anyhow::Result;
 use http::StatusCode;
+use rand::RngCore;
 use serde::{Deserialize, Serialize};
 use spin_sdk::http::{Request, Response};
-use uuid::Uuid;
+use uuid::{Uuid, Builder};
 
 use super::common::*;
 
@@ -29,6 +31,24 @@ pub fn handle_uuid_request(req: Request) -> Result<Response> {
 
     let uuid_callable = match uuid_request.version {
         4 => || vec![uuid::Uuid::new_v4()],
+        5 => || {
+            let mut random_bytes = [0u8; 32];
+            rand::rngs::OsRng.fill_bytes(&mut random_bytes);
+            let uuid = uuid::Uuid::new_v5(
+                &uuid::Uuid::NAMESPACE_DNS,
+                &random_bytes,
+            );
+            
+            return vec![uuid];
+        },
+        7 => || {
+            let ts = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
+            let mut random_bytes = [0u8; 10];
+            rand::rngs::OsRng.fill_bytes(&mut random_bytes);
+            let uuid = Builder::from_unix_timestamp_millis(ts.as_millis().try_into().unwrap(), &random_bytes).into_uuid();   
+            
+            return vec![uuid];
+        },
         _ => {
             return bad_request(Some(format!(
                 "Unsupported Uuid version {0}",

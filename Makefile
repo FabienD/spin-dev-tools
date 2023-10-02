@@ -17,15 +17,15 @@ deploy: build-prod
 
 build-prod:
 	@echo "Building spin for production"
-	export NEXT_PUBLIC_API_URL=https://dev-tools.fermyon.app/api && spin build
+	export RUSTFLAGS="--cfg uuid_unstable" && export NEXT_PUBLIC_API_URL=https://dev-tools.fermyon.app/api && spin build
 
 build-local:
 	@echo "Building spin for local"
-	export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && spin build
+	export RUSTFLAGS="--cfg uuid_unstable" && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && spin build
 
 watch-local:
 	@echo "Building spin for local"
-	export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && spin watch
+	export RUSTFLAGS="--cfg uuid_unstable" && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && spin watch
 
 web-dev:
 	@echo "Starting web"
@@ -41,4 +41,4 @@ api-build:
 
 api-dev:
 	@echo "Building api microservice"
-	cd api && cargo watch --target wasm32-wasi --release
+	cd api && cargo watch -x run --target wasm32-wasi --release

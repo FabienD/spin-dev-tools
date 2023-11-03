@@ -2,7 +2,7 @@
 name = "api"
 authors = ["Fabien D. <fabien@myprod.net>"]
 description = "A set of tools"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [lib]
@@ -16,16 +16,16 @@ bytes = "1.5.0"
 # General-purpose crate with common HTTP types.
 http = "0.2.9"
 
-uuid =  { version="1.4.1", features = ["fast-rng", "v4", "v5", "v6", "v7", "serde"] }
-serde = { version="1.0.188", features = ["derive"] }
+uuid =  { version="1.5.0", features = ["fast-rng", "v4", "v5", "v6", "v7", "serde"] }
+serde = { version="1.0.190", features = ["derive"] }
 rand = "*"
-serde_json = "1.0.107"
-base64 = "0.21.4"
+serde_json = "1.0.108"
+base64 = "0.21.5"
 urlencoding = "2.1.3"
 passwords = "3.1.16"
 
 # The Spin SDK.
-spin-sdk = { git = "https://github.com/fermyon/spin", tag = "v1.5.1" }
+spin-sdk = { git = "https://github.com/fermyon/spin", tag = "v2.0.0-rc.1" }
 # Crate that generates Rust Wasm bindings from a WebAssembly interface.
 wit-bindgen-rust = { git = "https://github.com/bytecodealliance/wit-bindgen" }
 

@@ -12,12 +12,10 @@ struct UrlRequest {
 }
 
 pub fn handle_url_request(req: Request) -> Result<Response> {
-    let url_request: UrlRequest = match req.body() {
-        Some(body) => match serde_json::from_slice(&body) {
-            Ok(request) => request,
-            _ => return bad_request(Some("Bad payload format".to_string())),
-        },
-        _ => return bad_request(None),
+    let body = req.body();
+    let url_request: UrlRequest = match serde_json::from_slice(&body) {
+        Ok(request) => request,
+        _ => return bad_request(Some("Bad payload format".to_string())),
     };
 
     let process_input: String;

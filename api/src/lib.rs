@@ -1,7 +1,6 @@
 use anyhow::Result;
-use http::Method;
 use spin_sdk::{
-    http::{not_found, Request, Response},
+    http::{Request, Response, responses, Method},
     http_component,
 };
 
@@ -15,17 +14,15 @@ use tools::uuid::handle_uuid_request;
 #[http_component]
 fn handle_dev_tools(req: Request) -> Result<Response> {
     let method = req.method();
-    let path = req.uri().path();
+    let path = req.path();
 
     match (method, path) {
-        (&Method::GET, "/") => Ok(http::Response::builder()
-            .status(200)
-            .body(Some("Hello from Fermyon Cloud!".into()))?),
-        (&Method::POST, "/api/base64") => handle_base64_request(req),
-        (&Method::POST, "/api/json") => handle_json_request(req),
-        (&Method::POST, "/api/password") => handle_password_request(req),
-        (&Method::POST, "/api/url") => handle_url_request(req),
-        (&Method::POST, "/api/uuid") => handle_uuid_request(req),
-        _ => not_found(),
+        (&Method::Get, "/") => Ok(Response::new(200, "Hello from Fermyon")),
+        (&Method::Post, "/api/base64") => handle_base64_request(req),
+        (&Method::Post, "/api/json") => handle_json_request(req),
+        (&Method::Post, "/api/password") => handle_password_request(req),
+        (&Method::Post, "/api/url") => handle_url_request(req),
+        (&Method::Post, "/api/uuid") => handle_uuid_request(req),
+        _ => Ok(responses::not_found()),
     }
 }

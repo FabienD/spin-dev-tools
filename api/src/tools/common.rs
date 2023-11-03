@@ -1,7 +1,7 @@
 use anyhow::Result;
 use http::StatusCode;
 use serde::Serialize;
-use spin_sdk::http::Response;
+use spin_sdk::http::{Response, ResponseBuilder};
 
 #[derive(Debug, Serialize)]
 struct ErrorResponse {
@@ -26,17 +26,19 @@ pub fn bad_request(message: Option<String>) -> Result<Response> {
 
     let serialized_response = serde_json::to_string(&json_message).unwrap();
 
-    Ok(http::Response::builder()
-        .status(StatusCode::BAD_REQUEST)
+    Ok(ResponseBuilder::new(StatusCode::BAD_REQUEST)
         .header("Content-Type", "application/json")
-        .body(Some(serialized_response.into()))?)
+        .body(serialized_response)
+        .build()
+    )
 }
 
 pub fn return_response(json_message: ApiReponse) -> Result<Response> {
     let serialized_response = serde_json::to_string(&json_message).unwrap();
 
-    Ok(http::Response::builder()
-        .status(StatusCode::OK)
+    Ok(ResponseBuilder::new(StatusCode::OK)
         .header("Content-Type", "application/json")
-        .body(Some(serialized_response.into()))?)
+        .body(serialized_response)
+        .build()
+    )
 }

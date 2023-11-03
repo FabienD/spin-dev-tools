@@ -12,12 +12,10 @@ struct JsonRequest {
 }
 
 pub fn handle_json_request(req: Request) -> Result<Response> {
-    let json_request: JsonRequest = match req.body() {
-        Some(body) => match serde_json::from_slice(&body) {
-            Ok(request) => request,
-            _ => return bad_request(Some("Bad payload format".to_string())),
-        },
-        _ => return bad_request(None),
+    let body = req.body();
+    let json_request: JsonRequest = match serde_json::from_slice(&body) {
+        Ok(request) => request,
+        _ => return bad_request(Some("Bad payload format".to_string())),
     };
 
     let process_input: String;

@@ -13,12 +13,10 @@ struct Base64Request {
 }
 
 pub fn handle_base64_request(req: Request) -> Result<Response> {
-    let base64_request: Base64Request = match req.body() {
-        Some(body) => match serde_json::from_slice(&body) {
-            Ok(request) => request,
-            _ => return bad_request(Some("Bad payload format".to_string())),
-        },
-        _ => return bad_request(None),
+    let body = req.body();
+    let base64_request: Base64Request = match serde_json::from_slice(&body) {
+        Ok(request) => request,
+        _ => return bad_request(Some("Bad payload format".to_string())),
     };
 
     let process_input: String;

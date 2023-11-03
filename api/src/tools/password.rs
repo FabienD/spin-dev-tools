@@ -24,13 +24,10 @@ struct PasswordReponse {
 }
 
 pub fn handle_password_request(req: Request) -> Result<Response> {
-
-    let password_request: PasswordRequest = match req.body() {
-        Some(body) => match serde_json::from_slice(&body) {
-            Ok(request) => request,
-            _ => return bad_request(Some("Bad payload format".to_string())),
-        },
-        _ => return bad_request(None),
+    let body = req.body();
+    let password_request: PasswordRequest = match serde_json::from_slice(&body) {
+        Ok(request) => request,
+        _ => return bad_request(Some("Bad payload format".to_string())),
     }; 
 
     let pg: PasswordGenerator = PasswordGenerator {

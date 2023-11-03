@@ -3,7 +3,7 @@ use anyhow::Result;
 use http::StatusCode;
 use rand::RngCore;
 use serde::{Deserialize, Serialize};
-use spin_sdk::http::{Request, Response};
+use spin_sdk::http::{Request, Response, ResponseBuilder};
 use uuid::{Uuid, Builder};
 
 use super::common::*;
@@ -21,12 +21,10 @@ struct UuidReponse {
 }
 
 pub fn handle_uuid_request(req: Request) -> Result<Response> {
-    let uuid_request: UuidRequest = match req.body() {
-        Some(body) => match serde_json::from_slice(&body) {
-            Ok(request) => request,
-            _ => return bad_request(Some("Bad payload format".to_string())),
-        },
-        _ => return bad_request(None),
+    let body = req.body();
+    let uuid_request: UuidRequest = match serde_json::from_slice(&body) {
+        Ok(request) => request,
+        _ => return bad_request(Some("Bad payload format".to_string())),
     };
 
     let uuid_callable = match uuid_request.version {
@@ -70,8 +68,9 @@ pub fn handle_uuid_request(req: Request) -> Result<Response> {
 
     let serialized_response = serde_json::to_string(&json_message).unwrap();
 
-    Ok(http::Response::builder()
+    Ok(ResponseBuilder::new(StatusCode::OK)
         .header("Content-Type", "application/json")
-        .status(StatusCode::OK)
-        .body(Some(serialized_response.into()))?)
+        .body(serialized_response)
+        .build()
+    )
 }

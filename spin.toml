@@ -3,7 +3,7 @@ authors = ["Fabien D. <fabien@myprod.net>"]
 description = "A set of tools"
 name = "dev-tools"
 trigger = { type = "http", base = "/" }
-version = "0.1.1"
+version = "0.1.2"
 
 [[component]]
 id = "web"

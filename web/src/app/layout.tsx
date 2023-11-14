@@ -1,8 +1,9 @@
+import Script from 'next/script';
 import './global.css';
 
 export const metadata = {
-  title: 'Dev tools',
-  description: 'A collection of dev tools',
+  title: 'Dev tools - UUID, Password, Base64, JSON, URL',
+  description: 'Dev tools - UUID & Password generators, Base64 encode/decode, JSON Pretifier/Minifie, URL encode/decode',
 }
 
 export default function RootLayout({

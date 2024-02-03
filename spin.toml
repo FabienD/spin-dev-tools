@@ -1,30 +1,32 @@
-spin_manifest_version = "1"
-authors = ["Fabien D. <fabien@myprod.net>"]
-description = "A set of tools"
+spin_manifest_version = 2
+
+[application]
 name = "dev-tools"
-trigger = { type = "http", base = "/" }
-version = "0.1.2"
+description = "A set of tools"
+version = "0.2.0"
 
-[[component]]
-id = "web"
-source = "modules/spin_static_fs.wasm"
-environment = { FALLBACK_PATH = "index.html" }
-[[component.files]]
-source = "web/dist"
-destination = "/"
-[component.trigger]
-route = "/..."
-[component.build]
-workdir = "web"
-command = "npm run build"
-watch = ["src/**/*.tsx", "src/**/*.css", "package.json"]
-
-[[component]]
-id = "api"
-source = "api/target/wasm32-wasi/release/api.wasm"
-[component.trigger]
+[[trigger.http]]
 route = "/api/..."
-[component.build]
+component = "api"
+
+[component.api]
+source = "api/target/wasm32-wasi/release/api.wasm"
+
+[component.api.build]
 workdir = "api"
 command = "cargo build --target wasm32-wasi --release"
 watch = ["src/**/*.rs", "Cargo.toml"]
+
+[[trigger.http]]
+route = "/..."
+component = "fs"
+
+[component.fs]
+source = "modules/spin_static_fs.wasm"
+files = [ { source="web/dist", destination="/" } ]
+environment = { FALLBACK_PATH = "index.html" }
+
+[component.fs.build]
+workdir = "web"
+command = "npm run build"
+watch = ["src/**/*.tsx", "src/**/*.css", "package.json"]

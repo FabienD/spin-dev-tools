@@ -4,7 +4,7 @@ SHELL := /bin/bash
 
 install:
 	@echo "Installing dependencies"
-	cd web && yarn install
+	cd web && npm install
 	cd api && cargo install --locked --path .
 
 up:
@@ -29,11 +29,11 @@ watch-local:
 
 web-dev:
 	@echo "Starting web"
-	cd web && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && yarn dev
+	cd web && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && npm run dev
 
 web-build:
 	@echo "Building web microservice"
-	cd web && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && yarn build
+	cd web && export NEXT_PUBLIC_API_URL=http://127.0.0.1:3000/api && npm run build
 
 api-build:
 	@echo "Building api microservice"

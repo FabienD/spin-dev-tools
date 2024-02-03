@@ -26,7 +26,7 @@ pub fn bad_request(message: Option<String>) -> Result<Response> {
 
     let serialized_response = serde_json::to_string(&json_message).unwrap();
 
-    Ok(ResponseBuilder::new(StatusCode::BAD_REQUEST)
+    Ok(ResponseBuilder::new(StatusCode::BAD_REQUEST.as_u16())
         .header("Content-Type", "application/json")
         .body(serialized_response)
         .build()
@@ -36,7 +36,7 @@ pub fn bad_request(message: Option<String>) -> Result<Response> {
 pub fn return_response(json_message: ApiReponse) -> Result<Response> {
     let serialized_response = serde_json::to_string(&json_message).unwrap();
 
-    Ok(ResponseBuilder::new(StatusCode::OK)
+    Ok(ResponseBuilder::new(StatusCode::OK.as_u16())
         .header("Content-Type", "application/json")
         .body(serialized_response)
         .build()

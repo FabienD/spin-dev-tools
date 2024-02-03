@@ -17,7 +17,7 @@ fn handle_dev_tools(req: Request) -> Result<Response> {
     let path = req.path();
 
     match (method, path) {
-        (&Method::Get, "/") => Ok(Response::new(200, "Hello from Fermyon")),
+        (&Method::Get, "/api") => Ok(Response::new(200, "Hello from Fermyon")),
         (&Method::Post, "/api/base64") => handle_base64_request(req),
         (&Method::Post, "/api/json") => handle_json_request(req),
         (&Method::Post, "/api/password") => handle_password_request(req),

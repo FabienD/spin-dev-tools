@@ -68,7 +68,7 @@ pub fn handle_uuid_request(req: Request) -> Result<Response> {
 
     let serialized_response = serde_json::to_string(&json_message).unwrap();
 
-    Ok(ResponseBuilder::new(StatusCode::OK)
+    Ok(ResponseBuilder::new(StatusCode::OK.as_u16())
         .header("Content-Type", "application/json")
         .body(serialized_response)
         .build()

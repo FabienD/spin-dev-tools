@@ -2,7 +2,7 @@
 name = "api"
 authors = ["Fabien D. <fabien@myprod.net>"]
 description = "A set of tools"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 
 [lib]
@@ -10,17 +10,17 @@ crate-type = [ "cdylib" ]
 
 [dependencies]
 # Useful crate to handle errors.
-anyhow = "1.0.81"
+anyhow = "1.0.86"
 # Crate to simplify working with bytes.
 bytes = "1.6.0"
 # General-purpose crate with common HTTP types.
 http = "1.1.0"
 
 uuid =  { version="1.8.0", features = ["fast-rng", "v4", "v5", "v6", "v7", "serde"] }
-serde = { version="1.0.197", features = ["derive"] }
+serde = { version="1.0.203", features = ["derive"] }
 rand = "0.8.5"
-serde_json = "1.0.108"
-base64 = "0.22.0"
+serde_json = "1.0.117"
+base64 = "0.22.1"
 urlencoding = "2.1.3"
 passwords = "3.1.16"
 

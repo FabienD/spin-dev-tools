@@ -14,7 +14,7 @@ source = "api/target/wasm32-wasi/release/api.wasm"
 
 [component.api.build]
 workdir = "api"
-command = "cargo build --target wasm32-wasi --release"
+command = "cargo build --target wasm32-wasip1 --release"
 watch = ["src/**/*.rs", "Cargo.toml"]
 
 [[trigger.http]]
